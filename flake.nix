@@ -31,7 +31,7 @@
           };
 
           devShells = {
-            default = callPackage ./nix/shell.nix {};
+            default = callPackage ./shell.nix {};
         };
 
         formatter = nixfmt-rfc-style;

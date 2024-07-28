@@ -23,6 +23,7 @@ let
     (thing.overrideAttrs( _oa: {
       inherit CFLAGS CXXFLAGS LDFLAGS;
         nativeBuildInputs = _oa.nativeBuildInputs ++ [ ninja lld_18 ];
+        hardeningDisable=["all"];
         })).override {
 
             inherit stdenv;
