@@ -1,6 +1,7 @@
 { 
   brotli, 
   clang_18,
+  cmake,
   lib,
   libpng,
   lld_18,
@@ -14,14 +15,14 @@ let
     CFLAGS = "-O3  -ffast-math -funroll-loops" + 
         lib.optionalString ("${system}" == "aarch64-darwin") " -mcpu=apple-m1";
     CXXFLAGS = "${CFLAGS}";
-    LLDFLAGS="-flto -fuse-ld=lld";
+    LDFLAGS="-flto -fuse-ld=lld";
 
     inherit (llvmPackages_18) stdenv;
 
   override = thing: 
     (thing.overrideAttrs( _oa: {
       inherit CFLAGS CXXFLAGS LDFLAGS;
-        nativeBuildInputs = _oa.nativeBuildInputs ++ [ ninja ];
+        nativeBuildInputs = _oa.nativeBuildInputs ++ [ ninja lld_18 ];
         })).override {
 
             inherit stdenv;
